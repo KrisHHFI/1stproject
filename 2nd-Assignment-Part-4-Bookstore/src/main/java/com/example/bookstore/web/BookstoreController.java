@@ -43,6 +43,13 @@ public class BookstoreController {
         repository.save(book);
         return "redirect:booklist";
     }    
+	
+	// Edit Book
+	@RequestMapping(value = "/edit/{id}")
+	public String editBook(@PathVariable("id") Long id, Model model){
+		model.addAttribute("book", repository.findById(id));
+        return "editbook";
+    }   
 }
 //Browser url: localhost:8080/booklist
 
