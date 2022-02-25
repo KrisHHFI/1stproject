@@ -16,14 +16,17 @@
 		    <th>year</th>
 		    <th>isbn</th>
 		    <th>price</th>
+		    <th>Category</th>
+		    <th></th>
 		</tr>  
-		<!--A list of fetched books -->
+		<!--A list of fetched books, each attribute fills column -->
     	<tr th:each = "book : ${books}">
     		<td th:text="${book.title}"></td>
     		<td th:text="${book.author}"></td>
     		<td th:text="${book.year}"></td>
     		<td th:text="${book.isbn}"></td>
     		<td th:text="${book.price}"></td>
+    		<td th:text="${book.category.name}"></td>
     		<!--Delete Book button -->
     		<td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
     		<td><a th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td> 
