@@ -1,5 +1,6 @@
 package com.example.bookstore.web;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.bookstore.model.Book;
 import com.example.bookstore.model.BookRepository;
@@ -28,6 +30,20 @@ public class BookstoreController {
 		model.addAttribute("books", bookRepository.findAll());
 		return "booklist";
 	}
+	
+	// REST Part 1 -------------------
+	// REST, returns JSON to the browser
+    @RequestMapping(value="/books", method = RequestMethod.GET)
+    public @ResponseBody List<Book> bookListRest() {	
+        return (List<Book>) bookRepository.findAll();
+    }    
+	
+    // REST search book by id
+    @RequestMapping(value="/book/{id}", method = RequestMethod.GET) 
+    public @ResponseBody Optional<Book> findBookRest(@PathVariable("id") Long bookId) {
+    	return  bookRepository.findById(bookId);
+    }
+    // REST Part 2 -------------------
 	
 	// Deletes specific books, which are selected from HTML page
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
@@ -60,7 +76,11 @@ public class BookstoreController {
         return "editbook";
     } 
 }
+// URL views ---------------------------------------------------------------
 //Browser url: localhost:8080/booklist
+//JSON API view http://localhost:8080/api/books
+//JSON view http://localhost:8080/books
+// Example of searching book by ID. GO to API first, for example links  http://localhost:8080/api/books/3
 
 // For H2 console
 // Url: localhost:8080/h2-console

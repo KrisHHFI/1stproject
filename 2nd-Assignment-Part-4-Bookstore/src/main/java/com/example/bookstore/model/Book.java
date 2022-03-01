@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Book {
 	//Book framework accommodating attributes
@@ -22,13 +24,16 @@ public class Book {
 	// Category attribute, connects Book*-1Category
 	@ManyToOne
 	@JoinColumn(name = "categoryid")
+	//---
+	@JsonManagedReference
+	//---
 	private Category category;
 	
 	public Book() {
-		super();
 	}
 	
 	public Book(String title, String author, int year, String isbn, Double price, Category category) {
+		super();
 		this.title=title;
 		this.author=author; 
 		this.year=year;
