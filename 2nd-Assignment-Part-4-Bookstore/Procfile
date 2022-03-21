@@ -1,1 +1,1 @@
-web: java -jar target/2nd-Assignment-Part-4-Bookstore.jar
+web: java -jar 2nd-Assignment-Part-4-Bookstore.jar
